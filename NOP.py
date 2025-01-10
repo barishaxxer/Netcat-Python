@@ -29,6 +29,11 @@ class NOP:
 		while True:
 			client.sendall(b"-->")
 			command_buffer = client.recv(128)
+			if command_buffer.decode().strip() == "exit":
+				print("May the force be with you")
+				client.sendall(b'Goodbye old friend')
+				client.close()
+				
 			response = execute(command_buffer.decode())
 			if response:
 				client.sendall(response)
@@ -41,7 +46,12 @@ class NOP:
 		self.socket.connect((self.args.ip,self.args.port))
 		while True:
 			self.socket.send(b'-->')
-			command = self.socket.recv(4096)
-			response = execute(command.decode())
+			command = self.socket.recv(4096).decode().strip()
+			if command == "exit":
+				print("May the force be with you")
+				self.socket.sendall(b'Goodbye old friend')
+				break
+			
+			response = execute(command)
 			self.socket.send(response)
 			
