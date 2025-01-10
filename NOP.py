@@ -33,3 +33,15 @@ class NOP:
 			if response:
 				client.sendall(response)
 			command_buffer = b""
+
+	
+
+	def connect(self):
+
+		self.socket.connect((self.args.ip,self.args.port))
+		while True:
+			self.socket.send(b'-->')
+			command = self.socket.recv(4096)
+			response = execute(command.decode())
+			self.socket.send(response)
+			
