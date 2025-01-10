@@ -1,8 +1,10 @@
 import select
 import argparse
-import sys
+import os
 import NOP
 import subprocess
+import sys
+
 def init_argparse():
 
 	parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -25,8 +27,7 @@ def execute(command):
 	if is_windows():
 		shell_type = [r'C:\Windows\System32\cmd.exe']
 	interactive_shell = subprocess.Popen(shell_type, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	if command == "exit":
-		sys.exit("May the force be with you")
+
 	if command:
 		output = interactive_shell.communicate(input=command.encode())[0]
 	return output
