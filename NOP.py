@@ -1,6 +1,6 @@
 import socket
 import threading
-from bind import execute
+from get_shell import execute
 class NOP:
 
 	def __init__(self, args):
