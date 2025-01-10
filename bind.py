@@ -36,11 +36,7 @@ def execute(command):
 def main():
 
 	
-	shell_type = ['/bin/bash', '-i']
-	if is_windows():
-        	shell_type = [r'C:\Windows\System32\cmd.exe']
 
-	interactive_shell = subprocess.Popen(shell_type, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	args = init_argparse()
 	
 	nc = NOP.NOP(args)
